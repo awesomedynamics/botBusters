@@ -1,1 +1,1 @@
-web: gunicorn tablica_bot:server
+web: gunicorn botbusters:server
