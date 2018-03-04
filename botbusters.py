@@ -25,7 +25,7 @@ def start_command(message: telebot.types.Message):
 
     username = str(message.chat.first_name) + " " + str(message.chat.last_name)
 
-    startText = "Привет!" + username + " Я - бот botBusters  \n  Хочешь, мы и тебе сделаем крутого чат-бота ? "
+    startText = "Привет " + username + " Я - бот botBusters  \n  Хочешь, мы и тебе сделаем крутого чат-бота ? "
     bot.send_message(message.chat.id, startText)
 
     commands = ["Заказать бота", "А сайт у вас есть ?", "Сколько это стоит ?", "Перезвони мне"]
