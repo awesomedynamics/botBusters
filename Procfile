@@ -1,0 +1,1 @@
+web: gunicorn tablica_bot:server
