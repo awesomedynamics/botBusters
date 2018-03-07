@@ -88,7 +88,7 @@ def main_menu(message: telebot.types.Message):
 
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
 
-    get_phone_button = types.KeyboardButton(request_contact=True)
+    get_phone_button = types.KeyboardButton(text='Оставлю номер, позвоните', request_contact=True)
 
     markup.row(commands[0], commands[1])
     markup.row(commands[2], commands[3])
