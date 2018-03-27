@@ -25,18 +25,10 @@ def start_command(message: telebot.types.Message):
 
     username = str(message.chat.first_name) + " " + str(message.chat.last_name)
 
-    startText = "Привет " + username + " Я - бот botBusters  \n  Хочешь, мы и тебе сделаем крутого чат-бота ? "
+    startText = "Привет " + username + " Я - BotMonster ! \n  Хочешь, мы и тебе сделаем крутого чат-бота ? "
     bot.send_message(message.chat.id, startText)
 
-    commands = ["Заказать бота", "А сайт у вас есть ?", "Сколько это стоит ?", "Перезвони мне"]
-
-    markup = types.ReplyKeyboardMarkup(row_width=2,resize_keyboard=True)
-
-    markup.row(commands[0],commands[1])
-    markup.row(commands[2], commands[3])
-
-    bot.send_message(message.chat.id, "что дальше ?",
-                     reply_markup=markup)
+    main_menu(message)
 
     #Регистрируем юзера
     register_user(message)
@@ -45,11 +37,11 @@ def start_command(message: telebot.types.Message):
 @bot.message_handler(func = lambda message: message.text is not None and message.text == "Заказать бота")
 def order_bot(message: telebot.types.Message):
     reply_markup = types.ForceReply()
-    bot.send_message(chat_id=message.chat.id, text="что должен делать бот:", reply_markup=reply_markup)
+    bot.send_message(chat_id=message.chat.id, text="короткая пользовательская история:", reply_markup=reply_markup)
 
 
 # Обрабатываем ответ о функционале бота
-@bot.message_handler(func = lambda message: message.reply_to_message is not None and message.reply_to_message.text == "что должен делать бот:")
+@bot.message_handler(func = lambda message: message.reply_to_message is not None and message.reply_to_message.text == "короткая пользовательская история:")
 def bot_userstory(message: telebot.types.Message):
     update_booking(chat_id=message.chat.id, product="bot", userstory = message.text)
     reply_markup = types.ForceReply()
@@ -84,7 +76,7 @@ def  book_callback(message: telebot.types.Message):
 #  обрабатываем кнопку В главное меню
 @bot.message_handler(func=lambda message: message.text is not None and message.text == "В главное меню")
 def main_menu(message: telebot.types.Message):
-    commands = ["Заказать бота", "А сайт у вас есть ?", "Сколько это стоит ?", "Перезвони мне"]
+    commands = ["Заказать бота", "А сайт у вас есть ?", "Сколько это стоит ?", "Попробуй наших демо ботов"]
 
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
 
