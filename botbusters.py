@@ -69,7 +69,7 @@ def main_menu(message: telebot.types.Message):
 
 
 # saving the contact
-@bot.message_handler(func=lambda message: message.content_type == "contact")
+@bot.message_handler(content_types= ["contact"])
 def free_text(message: telebot.types.Message):
 
     answer = "это контакт, я понял! "
