@@ -52,7 +52,7 @@ def update_log(chat_id = None, message = None):
                 "chat_id" : message.chat.id,
                 "name" : username,
                 "time" : datetime.datetime.now(),
-                "message" : message
+                "message" : message.text
             }
         username = str(message.chat.first_name) + " " + str(message.chat.last_name)
 
