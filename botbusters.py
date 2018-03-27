@@ -66,7 +66,18 @@ def main_menu(message: telebot.types.Message):
     bot.send_message(message.chat.id, "нажми на кнопку - получишь результат",
                      reply_markup=markup)
 
-#  сохраняем контакт
+
+
+# saving the contact
+@bot.message_handler(func=lambda message: message.content_type == "contact")
+def free_text(message: telebot.types.Message):
+
+    answer = "это контакт, я понял! "
+    update_log(chat_id=message.chat.id, message=message)
+    bot.send_message(message.chat.id, answer)
+
+
+#  handling free text message
 @bot.message_handler()
 def record_contact(message: telebot.types.Contact):
 
@@ -75,13 +86,7 @@ def record_contact(message: telebot.types.Contact):
     bot.send_message(message.chat.id, answer)
 
 
-#handling free text message
-@bot.message_handler()
-def free_text(message: telebot.types.Message):
 
-    answer = "Я пока ничего об этом не знаю, но ты точно найдешь желанное на нашем сайте! "
-    update_log(chat_id=message.chat.id, message=message)
-    bot.send_message(message.chat.id, answer)
 
 
 @server.route("/bot", methods=['POST','GET'])
