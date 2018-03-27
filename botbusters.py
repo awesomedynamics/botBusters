@@ -44,33 +44,10 @@ def order_bot(message: telebot.types.Message):
 @bot.message_handler(func = lambda message: message.reply_to_message is not None and message.reply_to_message.text == "короткая пользовательская история:")
 def bot_userstory(message: telebot.types.Message):
     update_booking(chat_id=message.chat.id, product="bot", userstory = message.text)
-    reply_markup = types.ForceReply()
-    bot.send_message(chat_id=message.chat.id, text="оставь нам свой телефон и мы перезвоним")
-    bot.send_message(chat_id=message.chat.id, text="мой телефон:", reply_markup=reply_markup)
-
-@bot.message_handler(func = lambda message: message.reply_to_message is not None and message.reply_to_message.text == "мой телефон:")
-def  get_contact(message: telebot.types.Message):
-
-    # апдейтим контакт в монго
-    update_booking(chat_id=message.chat.id, contact=message.text)
-
-
-    markup = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-    buttons_final = ["В главное меню"]
-    markup.row(buttons_final[0])
-
-
-    bot.send_message(chat_id=message.chat.id, text="круто! мы перезвоним в ближайшее время !", reply_markup=markup)
-
-
-
-#  обрабатываем кнопку Перезвони мне!
-
-@bot.message_handler(func = lambda message: message.text is not None and message.text == "Перезвони мне")
-def  book_callback(message: telebot.types.Message):
-    reply_markup = types.ForceReply()
-    bot.send_message(chat_id=message.chat.id, text="оставь нам свой телефон и мы перезвоним")
-    bot.send_message(chat_id=message.chat.id, text="мой телефон:", reply_markup=reply_markup)
+    markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+    get_phone_button = types.KeyboardButton(text='Оставлю номер, позвоните', request_contact=True)
+    markup.row(get_phone_button)
+    bot.send_message(chat_id=message.chat.id, text="оставь нам свой телефон и мы перезвоним", reply_markup=markup)
 
 
 #  обрабатываем кнопку В главное меню
@@ -86,7 +63,7 @@ def main_menu(message: telebot.types.Message):
     markup.row(commands[2], commands[3])
     markup.row(get_phone_button)
 
-    bot.send_message(message.chat.id, "что дальше ?",
+    bot.send_message(message.chat.id, "нажми на кнопку - получишь результат",
                      reply_markup=markup)
 
 #handling free text message
