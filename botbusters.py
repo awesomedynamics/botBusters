@@ -75,7 +75,7 @@ def free_text(message: telebot.types.Message):
     answer = "кул! мы перезвоним очень-очень скоро!"
     update_log(chat_id=message.chat.id, message=message)
     bot.send_message(message.chat.id, answer)
-    update_booking(chat_id=message.chat.id, contact=message.contact)
+    update_booking(chat_id=message.chat.id, contact=message.contact.phone_number)
 
 
 #  handling free text message
